@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap');
-*{
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap");
+* {
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
@@ -7,7 +7,7 @@
 }
 
 /* Navbar */
-.nav-bar{
+.nav-bar {
   height: 78px;
   background-color: black;
   display: flex;
@@ -15,18 +15,18 @@
   align-items: center;
   padding: 0 4rem;
 }
-.nav-bar a{
+.nav-bar a {
   text-decoration: none;
   color: white;
 }
-.nav-bar h2{
+.nav-bar h2 {
   font-size: 40px;
 }
-.nav-bag{
+.nav-bag {
   display: flex;
   align-items: center;
 }
-.bag-quantity{
+.bag-quantity {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +41,7 @@
 }
 
 /* Not Found */
-.not-found{
+.not-found {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,9 +49,70 @@
   color: gray;
   min-height: 80vh;
 }
-.not-found h2{
+.not-found h2 {
   font-size: 55px;
 }
-.not-found p{
+.not-found p {
   font-size: 28px;
+}
+
+/* Home */
+.home-container {
+  padding: 2rem 4rem;
+}
+.home-container h2 {
+  font-size: 40px;
+  font-weight: 400;
+  text-align: center;
+}
+.products {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+.product {
+  width: 250px;
+  max-width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1rem auto;
+  border-radius: 15px;
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),
+    2px 2px 5px rgba(94, 104, 121, 0.3);
+  padding: 1rem;
+}
+.product img {
+  width: 80%;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.product h3 {
+  font-size: 25px;
+  font-weight: 400;
+}
+.product .details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product .details .price {
+  font-size: 20px;
+  font-weight: 700;
+}
+.product button {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  margin-top: 2rem;
+  font-weight: 400;
+  letter-spacing: 1.15px;
+  background-color: #4b70e2;
+  color: #f9f9f9;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
