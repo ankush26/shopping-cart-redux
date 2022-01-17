@@ -1,8 +1,31 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import {
+  addToCart,
+  cartTotal,
+  decreaseCart,
+  removeFromCart,
+  clearCart
+} from "../features/cartSlice";
 function Cart() {
   const cart = useSelector((state) => state?.cart);
+  const dispatch = useDispatch();
+  const handleRemoveFromCart = (cartItem) => {
+    dispatch(removeFromCart(cartItem));
+  };
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+  const handleDecreaseCart = (product) => {
+    dispatch(decreaseCart(product));
+  };
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+  useEffect(() => {
+    dispatch(cartTotal());
+  }, [cart, dispatch]);
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
@@ -44,27 +67,33 @@ function Cart() {
                   <div>
                     <h3>{cartItem.name}</h3>
                     <p>{cartItem.desc}</p>
-                    <button>Remove</button>
+                    <button onClick={() => handleRemoveFromCart(cartItem)}>
+                      Remove
+                    </button>
                   </div>
                 </div>
-                <div className="cart-product-price">${cartItem.price}</div>
+                <div className="cart-product-price">₹{cartItem.price}</div>
                 <div className="cart-product-quantity">
-                  <button>-</button>
+                  <button onClick={() => handleDecreaseCart(cartItem)}>
+                    -
+                  </button>
                   <div className="count">{cartItem.cartQuantity}</div>
-                  <button>+</button>
+                  <button onClick={() => handleAddToCart(cartItem)}>+</button>
                 </div>
                 <div className="cart-product-total-price">
-                  ${cartItem.price * cartItem.cartQuantity}
+                  ₹{cartItem.price * cartItem.cartQuantity}
                 </div>
               </div>
             ))}
           </div>
           <div className="cart-summary">
-            <button className="clear-btn">Clear Cart</button>
+            <button className="clear-btn" onClick={() => handleClearCart()}>
+              Clear Cart
+            </button>
             <div className="cart-checkout">
               <div className="subtotal">
                 <span>Subtotal</span>
-                <span className="amount">${cart.cartTotalAmount}</span>
+                <span className="amount">₹{cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
               <button>Check out</button>

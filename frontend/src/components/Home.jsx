@@ -1,17 +1,21 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, cartTotal, removeFromCart } from "../features/cartSlice";
 import { useGetAllProductsQuery } from "../features/productsApi";
-import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { data, error, isLoading } = useGetAllProductsQuery();
+  const cartItems = useSelector((state) => state?.cart.cartItems);
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const handleAddToCart =product=>{
     dispatch(addToCart(product))
-    navigate('/cart')
+    dispatch(cartTotal());
   }
+  const handleRemoveFromCart=(cartItem)=>{
+    dispatch(removeFromCart(cartItem))
+    dispatch(cartTotal());
+  }
+  const isInCart = (product) => cartItems.find(cartItem=>cartItem.id===product.id)
 
   return (
     <div className="home-container">
@@ -29,9 +33,12 @@ function Home() {
                 <img src={product.image} alt={product.name} />
                 <div className="details">
                   <span>{product.desc}</span>
-                  <span className="price">${product.price}</span>
+                  <span className="price">₹{product.price}</span>
                 </div>
-                <button onClick={()=>handleAddToCart(product)}>Add To Cart</button>
+                {
+                isInCart(product) ? <button className='removeFromCart' onClick={()=>handleRemoveFromCart(product)}>Remove From Cart</button>
+                : <button className='addToCart  ' onClick={()=>handleAddToCart(product)}>Add To Cart</button> 
+                }
               </div>
             ))}
           </div>
